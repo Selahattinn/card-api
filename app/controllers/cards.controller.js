@@ -34,7 +34,13 @@ exports.create = (req, res) => {
 };
 // Get all Cards from the database.
 exports.getAll = (req, res) => {
-    Card.findAll({ where: { username: req.body.username } })
+  const username = req.body.username;
+    if (!username) {
+        return res.status(400).send({
+            message: "username can not be empty!"
+        });
+    }
+    Card.findAll({ where: { username: username } })
     .then(data => {
       res.send(data);
     })
@@ -49,9 +55,14 @@ exports.getAll = (req, res) => {
 // Update a Card by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
-  
+    const username = req.body.username;
+    if (!username) {
+        return res.status(400).send({
+            message: "username can not be empty!"
+        });
+    }
     Card.update(req.body, {
-      where: { id: id }
+      where: { id: id ,username:username}
     })
       .then(num => {
         if (num == 1) {
@@ -75,9 +86,14 @@ exports.update = (req, res) => {
 // Delete a Card with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
-  
+    const username = req.body.username;
+    if (!username) {
+        return res.status(400).send({
+            message: "username can not be empty!"
+        });
+    }
     Card.destroy({
-      where: { id: id }
+      where: { id: id , username: username}
     })
       .then(num => {
         if (num == 1) {
@@ -99,8 +115,14 @@ exports.delete = (req, res) => {
 
 // Delete all Cards specified username in the request
 exports.deleteAll = (req, res) => {
+    const username = req.body.username;
+    if (!username) {
+        return res.status(400).send({
+            message: "username can not be empty!"
+        });
+    }
     Card.destroy({
-      where: {username: req.body.username},
+      where: {username: username},
       truncate: false
     })
       .then(nums => {
@@ -121,8 +143,8 @@ exports.search = (req, res) => {
 
     Card.findAll({
         where: {
+          username: req.body.username,
             [Op.or]: [  
-
                 { name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + lookupValue + '%') },
                 { surname: sequelize.where(sequelize.fn('LOWER', sequelize.col('surname')), 'LIKE', '%' + lookupValue + '%') },
                 { company: sequelize.where(sequelize.fn('LOWER', sequelize.col('company')), 'LIKE', '%' + lookupValue + '%') },
