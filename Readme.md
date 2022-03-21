@@ -52,4 +52,15 @@ Bunu fixlemek için jwt'inin claimslere göre parse edilip içinden username de�
 
 Log middleware eklense fena olmaz.
 
+Bazı datalar kodda static. Bunların generic olup bir config file'dan okuması lazım.(serverIP/serverPort/JWT Signing key)
+
 Tests  :))))
+
+
+## For run:
+node server.js
+
+localhost:8080'de ayağa kalkıyor
+
+## JWT Secret
+secret
