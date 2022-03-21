@@ -46,7 +46,7 @@ Password:12345
 
 ## Eksikler
 
-Bir jwt kontrolü var ama user identifier olarak body içindeki username kullanılmakta. Bu sağlıklı bir kullanım değil ve kullanıcı burayı değiştirerek db'de işlem yapabilir. 
+Bir jwt kontrolü var ama user identifier olarak body içerisindeki username kullanılmakta. Bu sağlıklı bir kullanım değil ve kullanıcı burayı değiştirerek db'de işlem yapabilir. 
 
 Bunu fixlemek için jwt'inin claimslere göre parse edilip içinden username değerine göre db'de query çalıştırılmalı.
 
