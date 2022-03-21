@@ -28,7 +28,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the Card."
       });
     });
 };
@@ -47,7 +47,7 @@ exports.getAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving cards."
       });
     });
   };
@@ -71,7 +71,7 @@ exports.update = (req, res) => {
           });
         } else {
           res.send({
-            message: `Cannot update Tutorial with id=${id}. Maybe Card was not found or req.body is empty!`
+            message: `Cannot update Card with id=${id}. Maybe Card was not found or req.body is empty!`
           });
         }
       })
@@ -126,12 +126,12 @@ exports.deleteAll = (req, res) => {
       truncate: false
     })
       .then(nums => {
-        res.send({ message: `${nums} Tutorials were deleted successfully!` });
+        res.send({ message: `${nums} Cards were deleted successfully!` });
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while removing all tutorials."
+            err.message || "Some error occurred while removing all cards."
         });
       });
   };
@@ -164,26 +164,3 @@ exports.search = (req, res) => {
         });
     });
 };
-
-/* exports.search = (req, res) => {
-        const keyword = req.params.keyword;
-        Card.findAll({
-            where: {
-                [Op.or]: [
-                    { name: { [Op.iLike]: `%${keyword}%` } },
-                    { surname: { [Op.iLike]: `%${keyword}%` } },
-                    { company: { [Op.iLike]: `%${keyword}%` } },
-                    { phone: { [Op.iLike]: `%${keyword}%` } }
-                ]
-            }
-        })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving tutorials."
-            });
-        });
-    }; */
