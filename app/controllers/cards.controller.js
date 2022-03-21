@@ -12,7 +12,7 @@ exports.create = (req, res) => {
     });
     return;
   }
-  // Create a Tutorial
+  // Create a Card
   const card = {
     username: req.body.username,
     name: req.body.name,
