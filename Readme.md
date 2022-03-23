@@ -1,7 +1,5 @@
 # Card API
 
-Migration kısmında migration cli kullanmadım. Onun yerine elle kendim oluşturdum. Bunu ilk defa kullandığım için umarım doğru kullanmışımdır.
-
 ## Pre Reqs
 . Mysql
 
